@@ -4,6 +4,10 @@ autoload -Uz vcs_info
 zstyle ':vcs_info:git:*' formats '%F{green}(%b)%f'
 zstyle ':vcs_info:*' enable git
 
+precmd() {
+  vcs_info
+}
+
 # Main prompt with proper multi-line support
 PROMPT=$'%{%F{blue}%}%n%{%f%} ➜ %{%F{cyan}%}%~%{%f%} ${vcs_info_msg_0_} %{%F{white}%}$%{%f%} '
 

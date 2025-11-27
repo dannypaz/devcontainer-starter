@@ -4,6 +4,8 @@
     "dockerfile": "Dockerfile",
     "context": ".."
   },
+  "workspaceFolder": "/workspace",
+  "workspaceMount": "source=./,target=/workspace,type=bind",
   "postCreateCommand": "zsh .devcontainer/container-start.sh",
   "waitFor": "postCreateCommand",
   "features": {},
