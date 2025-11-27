@@ -1,0 +1,28 @@
+{
+  "name": "Curling Scrape Visualizer",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "postCreateCommand": "zsh .devcontainer/container-start.sh",
+  "waitFor": "postCreateCommand",
+  "features": {},
+  "mounts": [
+    "source=dev-profile,target=/devprofile,type=volume"
+  ],
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "[javascript][javascriptreact][typescript][typescriptreact]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode",
+          "editor.formatOnSave": true
+        },
+        "editor.scrollBeyondLastLine": false
+      },
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode"
+      ]
+    }
+  }
+}
