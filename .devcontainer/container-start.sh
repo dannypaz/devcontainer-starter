@@ -6,6 +6,11 @@ echo "Prepare environment"
 CURRENT_USER=${USER-:$(whoami)}
 sudo chown -R $CURRENT_USER ~/.cache
 
+# Specific perms to allow uv to create venv to help with vscode environment# Local settings
+echo "Setting perms for .venv"
+mkdir -p /workspace/.venv
+sudo chown -R $CURRENT_USER /workspace/.venv
+
 echo "Setting perms for node_modules"
 mkdir -p /workspace/node_modules
 
@@ -29,3 +34,6 @@ fi
 sudo mkdir -p /devprofile
 sudo touch /devprofile/.zsh_history
 sudo chown -R ${USER} /devprofile
+
+# Dep setup
+uv sync || exit 0

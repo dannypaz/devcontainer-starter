@@ -7,8 +7,7 @@ RUN apt-get update && apt-get install -y curl lsb-release ripgrep git inotify-to
 RUN chsh -s /bin/zsh
 ENV SHELL=/bin/zsh
 
-RUN mkdir -p /home/vscode/.cursor-server
-RUN chown -R vscode:vscode /home/vscode/.cursor-server
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
 USER vscode
 
@@ -20,3 +19,5 @@ RUN curl -fsSL https://get.pnpm.io/install.sh | SHELL="$(which zsh)" zsh -
 ENV PATH="/home/vscode/.local/share/pnpm:$PATH"
 ENV PNPM_HOME="/home/vscode/.local/share/pnpm"
 RUN zsh -c "pnpm config set store-dir ~/.pnpm-store && pnpm env use 22 --global"
+
+RUN uv python install 3.14

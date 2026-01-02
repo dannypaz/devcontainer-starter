@@ -1,3 +1,6 @@
+# Local settings
+export PATH="${HOME}/.local/bin:${PATH}"
+
 # ZSH
 export HISTFILE=/devprofile/.zsh_history
 export HISTSIZE=5000
@@ -8,6 +11,7 @@ compinit -C
 
 # Git settings
 export GIT_EDITOR="vim"
+
 # Let git know that it is managing a lot of files
 git config feature.manyFiles true
 git config push.autoSetupRemote true
@@ -15,3 +19,7 @@ git update-index --index-version 4
 
 # Set the theme
 source /workspace/.devcontainer/.devcontainer.zsh-theme
+
+# UV settings
+export UV_LINK_MODE=copy
+alias python="uv run python $@"

@@ -1,5 +1,5 @@
 {
-  "name": "Curling Scrape Visualizer",
+  "name": "Devcontainer",
   "build": {
     "dockerfile": "Dockerfile",
     "context": ".."
@@ -8,9 +8,9 @@
   "workspaceMount": "source=./,target=/workspace,type=bind",
   "postCreateCommand": "zsh .devcontainer/container-start.sh",
   "waitFor": "postCreateCommand",
-  "features": {},
   "mounts": [
-    "source=dev-profile,target=/devprofile,type=volume"
+    "source=dev-profile,target=/devprofile,type=volume",
+    "source=${localEnv:HOME}/.codex,target=/home/vscode/.codex,type=bind"
   ],
   "customizations": {
     "vscode": {
@@ -19,11 +19,37 @@
           "editor.defaultFormatter": "esbenp.prettier-vscode",
           "editor.formatOnSave": true
         },
-        "editor.scrollBeyondLastLine": false
+        "[python]": {
+          "editor.defaultFormatter": "charliermarsh.ruff",
+          "editor.formatOnSave": true,
+          "editor.insertSpaces": true,
+          "editor.tabSize": 4,
+          "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+          }
+        },
+        "editor.scrollBeyondLastLine": false,
+        "python.venvPath": "${workspaceFolder}",
+        "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+        "python.terminal.activateEnvironment": false,
+        "python.terminal.activateEnvInCurrentTerminal": false,
+        // disable pylance server to use ty instead
+        "python.languageServer": "None",
+        // disable type checking to use ty instead
+        "python.analysis.inlayHints.genericTypes": false,
+        "python.analysis.autoImportCompletions": false,
+        "ty.inlayHints.callArgumentNames": false,
+        "ty.inlayHints.variableTypes": false,
+        "ty.interpreter": [
+          "${workspaceFolder}/.venv/bin/python"
+        ]
       },
       "extensions": [
         "dbaeumer.vscode-eslint",
-        "esbenp.prettier-vscode"
+        "esbenp.prettier-vscode",
+        "openai.chatgpt",
+        "charliermarsh.ruff",
+        "astral-sh.ty"
       ]
     }
   }
